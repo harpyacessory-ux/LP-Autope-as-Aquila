@@ -506,18 +506,35 @@ section.light{background-image:
 /* traço de cor no topo dos cards claros */
 section.light .card{position:relative;overflow:hidden}
 section.light .card::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--mk,#1B3FA8)}
-/* "Para quem e": retrato do lojista ao lado do cabecalho.
-   No mobile ele entra no fluxo, alinhado a direita; a partir de 960px passa a
-   flutuar no canto, subindo um pouco dentro do padding da secao. */
+/* "Para quem e": cena da autopeças ao lado do cabecalho.
+   Duas camadas com fundo transparente: a bancada com estoque ao fundo, que se
+   dissolve no fundo claro pela esquerda e por baixo, e o dono apontando na
+   frente, que some por baixo para os cards subirem por cima dele.
+   No mobile a cena entra no fluxo abaixo do texto; a partir de 960px ela
+   ocupa a direita da secao ate a borda da tela. */
+#paraquem{overflow:clip}
+#paraquem .grid{position:relative;z-index:2}
 .pq-top{position:relative}
-.pq-foto{display:block;height:clamp(200px,44vw,270px);width:auto;
-  margin:.4rem -1rem -.6rem auto;pointer-events:none}
+.pq-top .head{position:relative;z-index:2}
+.pq-art{position:relative;height:clamp(300px,92vw,460px);margin:-.5rem calc(50% - 50vw) -2.5rem;
+  pointer-events:none}
+.pq-art img{position:absolute;bottom:0;width:auto;max-width:none}
+.pq-bancada{height:70%;right:-22%;opacity:.88;
+  -webkit-mask-image:linear-gradient(90deg,transparent 24%,#000 46%),linear-gradient(180deg,#000 62%,transparent 96%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 24%,#000 46%),linear-gradient(180deg,#000 62%,transparent 96%);
+  mask-composite:intersect}
+.pq-dono{height:100%;right:8%;
+  -webkit-mask-image:linear-gradient(180deg,#000 74%,transparent 97%);
+  mask-image:linear-gradient(180deg,#000 74%,transparent 97%)}
 @media(min-width:960px){
-  .pq-top{min-height:clamp(380px,38vw,520px)}
-  .pq-top .head{max-width:min(52%,56ch)}
-  .pq-foto{position:absolute;right:0;bottom:0;margin:0;
-    height:calc(100% + clamp(1.5rem,3vw,3rem));max-width:46%;object-fit:contain;
-    object-position:bottom right}
+  .pq-top{min-height:clamp(440px,40vw,560px)}
+  .pq-top .head{max-width:min(50%,56ch)}
+  .pq-art{position:absolute;margin:0;height:auto;
+    top:calc(-1 * clamp(4rem,8vw,7.5rem));bottom:calc(-1 * clamp(2rem,4vw,3.4rem));
+    left:34%;right:calc(50% - 50vw)}
+  .pq-bancada{height:88%;bottom:7%;right:-9%}
+  .pq-dono{height:88%;right:calc(max(1.25rem,(100vw - var(--wrap)) / 2) - 5rem)}
 }
 
 #paraquem .card:nth-child(1){--mk:var(--ml-yellow)}
@@ -669,12 +686,16 @@ section.light h2 b{
     <div class="pq-top">
       <div class="head reveal">
         <span class="eyebrow">Para quem é</span>
-        <h2>Feito para <b>dono de autopeças que vende no Mercado Livre, Shopee e Amazon.</b></h2>
-        <p class="lead">Se a sua loja já tem peça, estoque e fornecedor, o trabalho começa no primeiro dia.
-        Atendemos da autopeças que está colocando os primeiros anúncios no ar até quem já passa de R$ 100 mil por mês no canal.</p>
+        <h2>Feito para <b>dono de loja de autopeças que vende nos marketplaces.</b></h2>
+        <p class="lead">Se a sua loja já tem estoque, fornecedores e catálogo, o trabalho começa no primeiro dia.
+        Atendemos quem está começando do zero e quem já passa de R$ 100 mil por mês no canal.</p>
       </div>
-      <img class="pq-foto" src="assets/lojista-apontando.webp" alt=""
-           width="1166" height="1349" loading="lazy" decoding="async">
+      <div class="pq-art" aria-hidden="true">
+        <img class="pq-bancada" src="assets/bancada-autopecas.webp" alt=""
+             width="1600" height="742" loading="lazy" decoding="async">
+        <img class="pq-dono" src="assets/dono-autopecas-apontando.webp" alt=""
+             width="1305" height="1206" loading="lazy" decoding="async">
+      </div>
     </div>
 
     <div class="grid g4 reveal">
