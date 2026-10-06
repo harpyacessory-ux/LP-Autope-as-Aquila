@@ -1,6 +1,6 @@
-# LP Varejo Aquila
+# LP Autopeças Aquila
 
-Landing page da **Aquila Marketing Digital** — assessoria em Mercado Livre, Shopee e Amazon.
+Landing page da **Aquila Marketing Digital** — assessoria para lojas de autopeças no Mercado Livre, Shopee e Amazon.
 
 ## Estrutura
 
